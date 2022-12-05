@@ -1,11 +1,11 @@
 import copy
 
+# Parsing
 file = open('../data/data5.txt', 'r')
 data = file.read()
 file.close()
 lines = data.split("\n")
 
-# Part 1
 line = lines[0]
 numStacks = (len(line)+1)//4
 stacks = [[] for _ in range(numStacks)]
@@ -24,6 +24,7 @@ while "move" not in lines[i]:
 startingi = i
 startingStacks = copy.deepcopy(stacks)
 
+# Part 1
 while i<len(lines):
     numCrates = int(lines[i].split(" from ")[0].split(" ")[1])
     origin = int(lines[i].split(" from ")[1].split(" to ")[0])-1
