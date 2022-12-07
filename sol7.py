@@ -3,9 +3,9 @@ file = open('../data/data7.txt', 'r')
 data = file.read()
 file.close()
 lines = data.split("\n")
-lines += ["$"]
+lines += ["$"] # Enables the while loop to be run
 
-# Defining objects
+# Defining Node and root
 class Node:
     def __init__(self, name, directory=False, parent=None, size=0):
         self.name = name
@@ -45,10 +45,6 @@ class Node:
         else:
             return self.size
 
-    def print(self):
-        print(self.name)
-        for child in self.getChildren():
-            child.print()
 root = Node("/", directory = True)
 
 # Part 1
@@ -71,12 +67,11 @@ while i<(len(lines)-1):
     elif lines[i] == "$ ls":
         i += 1
         while lines[i][0] != "$":
-            if lines[i].split(" ")[0] == "dir":
-                newNode = Node(name = lines[i].split(" ")[1], directory = True, parent=currentNode)
-                currentNode.addChild(newNode)
+            dirOrSize, name = lines[i].split(" ")
+            if dirOrSize == "dir":
+                currentNode.addChild(Node(name = name, directory = True, parent=currentNode))
             else:
-                newNode = Node(name = lines[i].split(" ")[1], parent=currentNode, size=int(lines[i].split(" ")[0]))
-                currentNode.addChild(newNode)
+                currentNode.addChild(Node(name = name, parent=currentNode, size=int(dirOrSize)))
             i += 1
 
 global total
@@ -91,18 +86,18 @@ def addSizes(node):
             children = node.getChildren()
             for child in children:
                 addSizes(child)
-                
+
 addSizes(root)
 print(total)
 
 # Part 2
-unusedSpace = 70000000 - root.getSize()
+global minSize
+minSize = 70000000
+unusedSpace = minSize - root.getSize()
 global spaceRequired
 spaceRequired = 30000000 - unusedSpace
 
-global minSize
-minSize = 70000000
-def findMin(node):
+def findMinDirectory(node):
     if node.getDirectory():
         size = node.getSize()
         global spaceRequired
@@ -112,7 +107,7 @@ def findMin(node):
         if node.getChildren != None:
             children = node.getChildren()
             for child in children:
-                findMin(child)
+                findMinDirectory(child)
 
-findMin(root)
+findMinDirectory(root)
 print(minSize)
