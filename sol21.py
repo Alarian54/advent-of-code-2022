@@ -51,9 +51,7 @@ for monkey in monkeys:
 for monkey in monkeys:
     if monkey[:4] == "root":
         eq1 = monkey.split(" ")[1]
-        eq2 = monkey.split(" ")[3]
-
-eq2 = consts[eq2]
+        eq2 = consts[monkey.split(" ")[3]]
 
 initLen = 0
 while initLen != len(eq1):
