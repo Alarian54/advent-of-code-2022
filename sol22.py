@@ -15,14 +15,6 @@ height = len(map)
 width = max([len(row) for row in map])
 map = [row + " "*(width-len(row)) for row in map]
 
-print("..A.\nBCD.\n..EF\n")
-print(".BA\n.C.\nED.\nF..\n")
-
-# print(f"Path to follow: {path}\n")
-# print("Map to navigate:")
-# printM(map)
-# print()
-
 # Part 1
 r, c, d = 0, 0, 0
 while map[r][c] != ".": c += 1
@@ -68,19 +60,12 @@ final = (1000 * (r+1)) + (4 * (c+1)) + d
 print(f"Final password: {final}\n")
 
 # Part 2
-# sideWidth = 50  
-# def getSide(r, c):
-#     sides = {(0, 2): "A", (0, 1): "B", (1, 1): "C", (2, 1): "D", (2, 0): "E", (3, 0): "F"}  
-#     return sides[(r//sideWidth, c//sideWidth)]
-
 r, c, d = 0, 0, 0
 while map[r][c] != ".": c += 1
 print(f"Starting pos = row {r}, col {c}. Facing {d}")
-# print(f"Side: {getSide(r, c)}")
 
 
 i = 0
-# while i < 4:
 while i < len(path)-1:
     if path[i].isnumeric():
         num = path[i]
@@ -92,7 +77,6 @@ while i < len(path)-1:
     else:
         inst = path[i]
         i += 1
-    # print(f"Instruction: {inst}")
 
     if inst == "L": d = (d-1) % 4
     elif inst == "R": d = (d+1) % 4
@@ -145,17 +129,10 @@ while i < len(path)-1:
 
             next = map[nr][nc]
             if next == "#":
-                # print("#")
                 j = inst
             elif next == ".":
-                # print(".")
                 r, c, d = nr, nc, nd
                 j += 1
-            # print(r, c)
-
-    # print(f"Pos = row {r}, col {c}. Facing {d}")
-    # print(f"Side: {getSide(r, c)}")
-    # print()
 
 print(f"Final pos = row {r}, col {c}. Facing {d}")
 final = (1000 * (r+1)) + (4 * (c+1)) + d
