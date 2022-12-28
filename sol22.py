@@ -1,5 +1,4 @@
 # Setup
-file = open('../data/data00.txt', 'r')
 file = open('../data/data22.txt', 'r')
 data = file.read().split("\n")
 file.close()
