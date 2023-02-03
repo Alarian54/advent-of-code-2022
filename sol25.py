@@ -15,18 +15,13 @@ for num in nums:
         dec += ((5**pow) * digit)
         pow += 1
     total += dec
-    # print(f"Snafu: {num}")
-    # print(f"Decimal: {dec}")
-    # print()
 
-# total = 23
 print(f"Decimal total: {total}")
 
 snafu = ""
 pow = 1
 carry = 0
 while total > 0 or carry > 0:
-# for i in range(10):
     print("Power:", pow)
     rem = (total % (5**pow))
     total -= rem
